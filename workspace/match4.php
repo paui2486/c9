@@ -5,9 +5,30 @@
 require_once('/home/ubuntu/workspace/workspace/PHPExcel/Classes/PHPExcel.php');// 輸出用
 //require_once('/home/ubuntu/workspace/workspace/PHPExcel/Classes/PHPExcel/Writer/Excel2007.php');// 輸出用
 require_once('/home/ubuntu/workspace/workspace/PHPExcel/Classes/PHPExcel/IOFactory.php');//讀取用
+
+$today = (date("Ymd"));
+
+$objPHPExcel = new PHPExcel(); //實作一個 PHPExcel
+
+$objPHPExcel->getProperties()->setCreator("PHP") //建立者
+        ->setLastModifiedBy("PHP")//上次修改
+        ->setTitle("Title標題") //標題
+        ->setSubject("Subject副標題")//副標題
+        ->setDescription("Description說明")//說明
+        ->setKeywords("Keywords關鍵字")//關鍵字
+        ->setCategory("Category分類");//分類
+$objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true); 
+//設定操作中的工作表
+$objPHPExcel->setActiveSheetIndex(0); //指定目前要編輯的工作表 ，預設0是指第一個工作表
+$sheetX = $objPHPExcel->getActiveSheet();
+
+//將工作表命名
+$sheetX->setTitle('第一張表');//第一個工作表 名稱
+
+//// 這以上是存檔需要的宣告 以下是讀檔必備的資料
 //檔案路徑
+
 $inputFileName = 'filename.xlsx';
-//$inputFileName1 = '【T】15-16_NANI20170613_16篇_NANI.xls';
 $inputFileName1 = 'FV.xlsx';
 
 $inputFileType = PHPExcel_IOFactory::identify($inputFileName);// 讓程式自動判別副檔名
@@ -52,8 +73,8 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         
             if($val ==$val1){
-               echo $inputFileName.'欄位'.$column.$row.'等於'.$inputFileName1.'欄位'.$column1.$row1;
-               
+               //echo $inputFileName.'欄位'.$column.$row.'等於'.$inputFileName1.'欄位'.$column1.$row1;
+               $sheetX->setCellValue("D".($row),$inputFileName.'欄位'.$column.$row.'等於'.$inputFileName1.'欄位'.$column1.$row1);
             }else{
                 
             }
@@ -69,5 +90,22 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
     }
     echo "<br />";
 }
+// 存檔必須宣告的必要資訊
+
+$filename = urlencode($today);
+ob_end_clean();
+
+$filename = $filename.'.xlsx';
+
+header("Content-type: text/html; charset=utf-8");
+header("Content-Type: application/vnd.ms-excel");
+header("Content-Disposition: attachment;filename=".$filename);
+header("Cache-Control: max-age=0");
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save('php://output');
+$objWriter->save('filenameX.xlsx');// 另存成指定檔名
+
+exit;
 
 ?>
