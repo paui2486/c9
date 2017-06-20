@@ -25,6 +25,8 @@ $sheetX = $objPHPExcel->getActiveSheet();
 //將工作表命名
 $sheetX->setTitle('第一張表');//第一個工作表 名稱
 
+$sheetX->getColumnDimension('A')->setWidth(40); //設定欄寬
+$sheetX->getColumnDimension('D')->setWidth(40);
 //// 這以上是存檔需要的宣告 以下是讀檔必備的資料
 //檔案路徑
 
@@ -73,8 +75,12 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         
             if($val ==$val1){
-               //echo $inputFileName.'欄位'.$column.$row.'等於'.$inputFileName1.'欄位'.$column1.$row1;
+               $translation = $sheet1->getCellByColumnAndRow((($column)+1), $row)->getValue();
+               $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
+               
+               $sheetX->setCellValue("A".($row),$original);
                $sheetX->setCellValue("D".($row),$inputFileName.'欄位'.$column.$row.'等於'.$inputFileName1.'欄位'.$column1.$row1);
+               $sheetX->setCellValue("E".($row),$translation);
             }else{
                 
             }
@@ -104,7 +110,7 @@ header("Cache-Control: max-age=0");
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save('php://output');
-$objWriter->save('filenameX.xlsx');// 另存成指定檔名
+//$objWriter->save('filenameX.xlsx');// 另存成指定檔名
 
 exit;
 
