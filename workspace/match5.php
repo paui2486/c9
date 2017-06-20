@@ -73,7 +73,7 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $val = $sheet->getCellByColumnAndRow($column, $row)->getValue();
         //$val1 = $sheet1->getCellByColumnAndRow($column, $row)->getValue();
         
-        // 開始比對 這是一對一 且欄位相同但是我需秋的是一對多 例如A.EXCEL的A1 比對完B.EXCEL 的A1~AXX
+        // 開始比對 
         if($val != null){
             
     for ($row1 = 0; $row1 <= $highestRow1; $row1++) {
