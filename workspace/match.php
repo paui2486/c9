@@ -9,13 +9,16 @@ require_once('/home/ubuntu/workspace/workspace/PHPExcel/Classes/PHPExcel/IOFacto
 $inputFileName = 'filename.xls';
 $inputFileName1 = '【T】15-16_NANI20170613_16篇_NANI.xls';
 
-$reader = PHPExcel_IOFactory::createReader('Excel2007'); // 讀取2007 excel 檔案
-$reader1 = PHPExcel_IOFactory::createReader('Excel2007'); // 讀取2007 excel 檔案
+$inputFileType = PHPExcel_IOFactory::identify($inputFileName);// 讓程式自動判別副檔名
+$inputFileType1 = PHPExcel_IOFactory::identify($inputFileName1);// 讓程式自動判別副檔名
+
+$reader = PHPExcel_IOFactory::createReader($inputFileType); // 讀取2007 excel 檔案
+$reader1 = PHPExcel_IOFactory::createReader($inputFileType1); // 讀取2007 excel 檔案
 
 $PHPExcel = $reader->load($inputFileName); // 檔案名稱 需已經上傳到主機上
-$PHPExcel1 = $reader->load($inputFileName1); // 檔案名稱 需已經上傳到主機上
+$PHPExcel1 = $reader1->load($inputFileName1); // 檔案名稱 需已經上傳到主機上
 
-
+//
 
 $sheet = $PHPExcel->getSheet(0); // 讀取第一個工作表(編號從 0 開始)
 $sheet1 = $PHPExcel1->getSheet(0); // 讀取第一個工作表(編號從 0 開始)
