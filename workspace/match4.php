@@ -65,7 +65,8 @@ echo '總共 '.$highestRow.' 列<br>';
 for ($row = 0; $row <= $highestRow; $row++) {//直的
     for ($column = 0; $column <= 1; $column++) {//看你有幾個欄位 橫的
         $val = $sheet->getCellByColumnAndRow($column, $row)->getValue();
-        //$val1 = $sheet1->getCellByColumnAndRow($column, $row)->getValue();
+        $Newval = preg_split("/[\s,]+/",$val);
+        print_r ($Newval[0]);
         
         // 開始比對 這是一對一 且欄位相同但是我需秋的是一對多 例如A.EXCEL的A1 比對完B.EXCEL 的A1~AXX
         if($val != null){
@@ -73,9 +74,10 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
     for ($row1 = 0; $row1 <= $highestRow; $row1++) {
         for ($column1 = 0; $column1 <= 0; $column1++) {
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
-        
-            if($val ==$val1){
-               $translation = $sheet1->getCellByColumnAndRow((($column)+1), $row)->getValue();
+        $Newval1 = preg_split("/[\s,]+/",$val1);
+        print_r ($Newval1[0]);
+            if($val == $val1 || $Newval[0] == $Newval1[0]){
+               $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();
                $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
                
                $sheetX->setCellValue("A".($row),$original);
