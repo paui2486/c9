@@ -6,7 +6,7 @@ require_once('/home/ubuntu/workspace/workspace/PHPExcel/Classes/PHPExcel.php');/
 
 require_once('/home/ubuntu/workspace/workspace/PHPExcel/Classes/PHPExcel/IOFactory.php');//讀取用
 
-$today = (date("Ymd"));
+//$today = (date("Ymd"));
 
 $objPHPExcel = new PHPExcel(); //實作一個 PHPExcel
 
@@ -32,9 +32,9 @@ $sheetX->getColumnDimension('D')->setWidth(40);
 //檔案路徑
 
 $inputFileName = $newxlsx;// 需要被翻譯的 動態化
-$inputFileName1 = 'new.xlsx';//翻譯檔
+$inputFileName1 = 'new.xlsx';//翻譯檔 
 
-$inputFileType = PHPExcel_IOFactory::identify($inputFileName);// 讓程式自動判別副檔名
+$inputFileType = PHPExcel_IOFactory::identify($inputFileName);// 讓程式自動判別副檔名(excel版本)
 $inputFileType1 = PHPExcel_IOFactory::identify($inputFileName1);// 讓程式自動判別副檔名
 
 $reader = PHPExcel_IOFactory::createReader($inputFileType); // 讀取2007 excel 檔案
@@ -106,7 +106,7 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
 }
 // 存檔必須宣告的必要資訊
 
-$filename = urlencode($newxlsx);
+$filename = urlencode($startX);
 ob_end_clean();
 
 $filename = $filename.'以比對'.'.xlsx';
