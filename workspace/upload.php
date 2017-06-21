@@ -10,6 +10,8 @@
 // display file details
 
 //變數區 開始
+
+//$filename = md5(uniqid(rand()));//$filename可以用隨機md5來產生32位的不規則檔名 封印
 $target_dir = "/home/ubuntu/workspace/workspace/";//存檔路徑
 $temp = explode(".", $_FILES["uploadFile"]["name"]);//explode把檔名跟副檔名用 " . “分開
 $extension = end($temp);//end選取array最後一個元素也就是副檔名
@@ -60,7 +62,7 @@ if (@copy($_FILES['uploadFile']['tmp_name'], "$target_dir" . $_FILES['uploadFile
     echo "<b>檔案上傳成功</br>";
     echo "$target_dir" . $_FILES['uploadFile']['name'];
     $newxlsx = $_FILES['uploadFile']['name'];
-    //include("match6.php");
+    include("match6.php");
 } else {
     echo "<b>Error: 檔案上傳失敗</br>";
     echo "Error: " . $_FILES["file"]["error"];
