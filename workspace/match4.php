@@ -68,7 +68,7 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $Newval = preg_split("/[\s,]+/",$val);
         print_r ($Newval[0]);
         
-        // 開始比對 這是一對一 且欄位相同但是我需秋的是一對多 例如A.EXCEL的A1 比對完B.EXCEL 的A1~AXX
+        // 開始比對 
         if($val != null){
             
     for ($row1 = 0; $row1 <= $highestRow; $row1++) {
@@ -76,7 +76,7 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         $Newval1 = preg_split("/[\s,]+/",$val1);
         print_r ($Newval1[0]);
-            if($val == $val1 || $Newval[0] == $Newval1[0]){
+            if($val == $val1 || $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1]){ //只用地段落太容易出錯 改用雙斷落 三段落
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();
                $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
                
