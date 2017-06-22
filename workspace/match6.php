@@ -80,13 +80,13 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         for ($column1 = 0; $column1 <= $TotalColumn1; $column1++) {
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         
-            if($val ==$val1){
+            if($val == $val1){
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();// 為何加1 應為要根據翻譯檔 英文原文跟中文版相對距離置
                 //例如這裡是C跟D 差距1               
                 $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
                
                $sheetX->setCellValue("A".($row),$original);
-               //$sheetX->setCellValue("D".($row),$inputFileName.'欄位'.$column.$row.'等於'.$inputFileName1.'欄位'.$column1.$row1);
+               
                $sheetX->setCellValue("D".($row),$translation);
                
             }else{
@@ -120,6 +120,6 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save('php://output');
 //$objWriter->save('filenameX.xlsx');// 另存成指定檔名
 
-exit;
+//exit;
 
 ?>
