@@ -25,13 +25,16 @@ $sheetX = $objPHPExcel->getActiveSheet();
 //將工作表命名
 $sheetX->setTitle('第一張表');//第一個工作表 名稱
 
-$sheetX->getColumnDimension('A')->setWidth(40); //設定欄寬
-$sheetX->getColumnDimension('D')->setWidth(40);
+$sheetX->getColumnDimension('A')->setWidth(50); //設定欄寬
+$sheetX->getColumnDimension('B')->setWidth(20);
+$sheetX->getColumnDimension('C')->setWidth(20);
+$sheetX->getColumnDimension('D')->setWidth(50);
+$sheetX->getColumnDimension('E')->setWidth(50);
 //// 這以上是存檔需要的宣告 以下是讀檔必備的資料
 //檔案路徑
 
-$inputFileName = 'filename.xlsx';
-$inputFileName1 = 'FV.xlsx';
+$inputFileName = 'filename.xlsx';//要被翻譯的
+$inputFileName1 = 'new.xlsx';//翻譯檔
 
 $inputFileType = PHPExcel_IOFactory::identify($inputFileName);// 讓程式自動判別副檔名
 $inputFileType1 = PHPExcel_IOFactory::identify($inputFileName1);// 讓程式自動判別副檔名
@@ -63,19 +66,19 @@ echo '總共 '.$highestRow.' 列<br>';
 
 // 一次讀取一列
 for ($row = 0; $row <= $highestRow; $row++) {//直的
-    for ($column = 0; $column <= 1; $column++) {//看你有幾個欄位 橫的
+    for ($column = 0; $column <= $TotalColumn; $column++) {//看你有幾個欄位 橫的
         $val = $sheet->getCellByColumnAndRow($column, $row)->getValue();
         $Newval = preg_split("/[\s,]+/",$val);
-        print_r ($Newval[0]);
+        //print_r ($Newval[0]);
         
         // 開始比對 
         if($val != null){
             
-    for ($row1 = 0; $row1 <= $highestRow; $row1++) {
-        for ($column1 = 0; $column1 <= 0; $column1++) {
+    for ($row1 = 0; $row1 <= $highestRow1; $row1++) {
+        for ($column1 = 0; $column1 <= $TotalColumn1; $column1++) {
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         $Newval1 = preg_split("/[\s,]+/",$val1);
-        print_r ($Newval1[0]);
+        //print_r ($Newval1[0]);
             if($val == $val1 || $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1]){ //只用地段落太容易出錯 改用雙斷落 三段落
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();
                $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
