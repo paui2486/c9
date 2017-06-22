@@ -17,10 +17,7 @@ $objPHPExcel->getProperties()->setCreator("PHP") //建立者
         ->setDescription("Description說明")//說明
         ->setKeywords("Keywords關鍵字")//關鍵字
         ->setCategory("Category分類");//分類
-for($i=1;$i<=$TotalColumn;$i++)
-{        
-$objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true); // 自動換行 應該用迴圈包起來
-}
+
 //設定操作中的工作表
 $objPHPExcel->setActiveSheetIndex(0); //指定目前要編輯的工作表 ，預設0是指第一個工作表
 $sheetX = $objPHPExcel->getActiveSheet();
@@ -124,6 +121,6 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save('php://output');
 //$objWriter->save('filenameX.xlsx');// 另存成指定檔名
 
-//exit;
+exit;// 注意 這個exit是必要的 雖然沒有程式 也會正常執行刑但是最後產生的excel會有問題
 
 ?>
