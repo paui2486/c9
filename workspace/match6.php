@@ -17,7 +17,10 @@ $objPHPExcel->getProperties()->setCreator("PHP") //建立者
         ->setDescription("Description說明")//說明
         ->setKeywords("Keywords關鍵字")//關鍵字
         ->setCategory("Category分類");//分類
-$objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true); 
+for($i=1;$i<=$TotalColumn;$i++)
+{        
+$objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true); // 自動換行 應該用迴圈包起來
+}
 //設定操作中的工作表
 $objPHPExcel->setActiveSheetIndex(0); //指定目前要編輯的工作表 ，預設0是指第一個工作表
 $sheetX = $objPHPExcel->getActiveSheet();
@@ -71,7 +74,7 @@ echo '總共 '.$highestRow.' 列<br>';
 for ($row = 0; $row <= $highestRow; $row++) {//直的
     for ($column = 0; $column <= $TotalColumn; $column++) {//看你有幾個欄位 橫的
         $val = $sheet->getCellByColumnAndRow($column, $row)->getValue();
-        //$val1 = $sheet1->getCellByColumnAndRow($column, $row)->getValue();
+        $Newval = preg_split("/[\s,]+/",$val);
         
         // 開始比對 
         if($val != null){
@@ -79,8 +82,9 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
     for ($row1 = 0; $row1 <= $highestRow1; $row1++) {
         for ($column1 = 0; $column1 <= $TotalColumn1; $column1++) {
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
+        $Newval1 = preg_split("/[\s,]+/",$val1);
         
-            if($val == $val1){
+            if($val == $val1 || $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1]){
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();// 為何加1 應為要根據翻譯檔 英文原文跟中文版相對距離置
                 //例如這裡是C跟D 差距1               
                 $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
