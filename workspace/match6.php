@@ -26,8 +26,11 @@ $sheetX = $objPHPExcel->getActiveSheet();
 //將工作表命名
 $sheetX->setTitle('第一張表');//第一個工作表 名稱
 
-$sheetX->getColumnDimension('A')->setWidth(40); //設定欄寬
-$sheetX->getColumnDimension('D')->setWidth(40);
+$sheetX->getColumnDimension('A')->setWidth(50); //設定欄寬
+$sheetX->getColumnDimension('B')->setWidth(20);
+$sheetX->getColumnDimension('C')->setWidth(20);
+$sheetX->getColumnDimension('D')->setWidth(50);
+$sheetX->getColumnDimension('E')->setWidth(50);
 //// 這以上是存檔需要的宣告 以下是讀檔必備的資料
 //檔案路徑
 
@@ -41,7 +44,7 @@ $reader = PHPExcel_IOFactory::createReader($inputFileType); // 讀取2007 excel 
 $reader1 = PHPExcel_IOFactory::createReader($inputFileType1); // 讀取2007 excel 檔案
 
 $PHPExcel = $reader->load($inputFileName); // 檔案名稱 需已經上傳到主機上
-$PHPExcel1 = $reader->load($inputFileName1); // 檔案名稱 需已經上傳到主機上
+$PHPExcel1 = $reader1->load($inputFileName1); // 檔案名稱 需已經上傳到主機上
 
 
 
