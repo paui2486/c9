@@ -47,7 +47,6 @@ $PHPExcel = $reader->load($inputFileName); // 檔案名稱 需已經上傳到主
 $PHPExcel1 = $reader1->load($inputFileName1); // 檔案名稱 需已經上傳到主機上
 
 
-
 $sheet = $PHPExcel->getSheet(0); // 讀取第一個工作表(編號從 0 開始)
 $sheet1 = $PHPExcel1->getSheet(0); // 讀取第一個工作表(編號從 0 開始)
 
@@ -65,7 +64,6 @@ $sheetX->getStyle('D'.$row)->getAlignment()->setWrapText(true);
 
 $TotalColumn = (ord($HighestColumn)-(64));// 將"任意"字符轉換為 ASCII 碼: 這裡是將G轉換71-64=7 
 $TotalColumn1 = (ord($HighestColumn1)-(64));
-
 
 echo '總共 '.$TotalColumn.' 行<br>';
 echo '總共 '.$highestRow.' 列<br>';
@@ -107,11 +105,9 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
             }
                 
         }
-            //放這裡
             
         }else{
-            //echo '<br>';
-
+            
         }
         
         
