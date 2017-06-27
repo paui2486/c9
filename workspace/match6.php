@@ -84,7 +84,9 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         $Newval1 = preg_split("/[\s,]+/",$val1);
         
-            if($val == $val1 || $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1]){
+        $rule = $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1];//新增調整規則變數化
+        
+            if($val == $val1 || $rule){
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();// 為何加1 應為要根據翻譯檔 英文原文跟中文版相對距離置
                 //例如這裡是C跟D 差距1               
                 $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
