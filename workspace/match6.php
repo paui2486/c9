@@ -74,8 +74,8 @@ echo '總共 '.$highestRow.' 列<br>';
 for ($row = 0; $row <= $highestRow; $row++) {//直的
     for ($column = 0; $column <= $TotalColumn; $column++) {//看你有幾個欄位 橫的
         $val = $sheet->getCellByColumnAndRow($column, $row)->getValue();
-        $Newval = preg_split("/[\s,]+/",$val);
-        
+        $Newval = preg_split("/[\s,]+/",$val);//根據空白切開 意思說 這邊根據單字做比對
+        //$NewvalS = preg_split("//",$val);//根據字元切開 意思說 這邊根據一個英文單字做比對
         // 開始比對 
         if($val != null){
             
@@ -84,7 +84,12 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $val1 = $sheet1->getCellByColumnAndRow($column1, $row1)->getValue();
         $Newval1 = preg_split("/[\s,]+/",$val1);
         
-        $rule = $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1];//新增調整規則變數化
+        $rule = $Newval[1] == $Newval1[1] && $Newval[2] == $Newval1[2] && $Newval[3] == $Newval1[3] && $Newval[4] == $Newval1[4] && $Newval[-1] == $Newval1[-1] && $Newval[-2] == $Newval1[-2] && $Newval[-3] == $Newval1[-3] && $Newval[-4] == $Newval1[-4];//新增調整規則變數化
+        $rule1 = $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1] && $Newval[-1] == $Newval1[-1];
+        $rule2 = $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1] && $Newval[-1] == $Newval1[-1];
+        
+        
+        
         
             if($val == $val1 || $rule){
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();// 為何加1 應為要根據翻譯檔 英文原文跟中文版相對距離置
