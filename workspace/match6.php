@@ -85,35 +85,38 @@ for ($row = 0; $row <= $highestRow; $row++) {//直的
         $Newval1 = preg_split("/[\s,]+/",$val1);
         
         $rule = $Newval[1] == $Newval1[1] && $Newval[2] == $Newval1[2] && $Newval[3] == $Newval1[3] && $Newval[4] == $Newval1[4] && $Newval[-1] == $Newval1[-1] && $Newval[-2] == $Newval1[-2] && $Newval[-3] == $Newval1[-3] && $Newval[-4] == $Newval1[-4];//新增調整規則變數化
-        $rule1 = $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1] && $Newval[-1] == $Newval1[-1];
-        $rule2 = $Newval[0] == $Newval1[0] && $Newval[1] == $Newval1[1] && $Newval[-1] == $Newval1[-1];
         
+        $rule1 = $Newval[1] == $Newval1[1] && $Newval[2] == $Newval1[2] && $Newval[-1] == $Newval1[-1] && $Newval[-2] == $Newval1[-2];
         
+        $rule2 = $Newval[1] == $Newval1[1] && $Newval[-1] == $Newval1[-1];
         
-        
-            if($val == $val1 || $rule){
+            if($val == $val1 || $rule){// 目前發生一個BUG 有的段落太短且單字重複 會造成有判斷出來但是沒結果
                $translation = $sheet1->getCellByColumnAndRow((($column1)+1), $row1)->getValue();// 為何加1 應為要根據翻譯檔 英文原文跟中文版相對距離置
                 //例如這裡是C跟D 差距1               
-                $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
+               $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
                
                $sheetX->setCellValue("A".($row),$original);
                
                $sheetX->setCellValue("D".($row),$translation);
                
-            }else{
+            }else{// 沒有比對成功也應該印出原文 並提示
+                $original = $sheet->getCellByColumnAndRow((($column)), $row)->getValue();
                 
+                $sheetX->setCellValue("A".($row),$original);
             }
             }
                 
         }
+            //放這裡
             
         }else{
-            echo '<br>';
+            //echo '<br>';
+
         }
         
         
     }
-    echo "<br />";
+//    echo "<br />";
 }
 // 存檔必須宣告的必要資訊
 
