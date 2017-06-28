@@ -22,7 +22,7 @@ class Database //DB
         try
         {
           self::$cont =  new PDO( "mysql:host=".self::$dbHost.";"."dbname=".self::$dbName.";"."charset=utf8", self::$dbUsername, self::$dbUserPassword);  //charset
-          //$pdo = new PDO('mysql:host=localhost;dbname=c9;charset=utf8', 'paui', '28835328');
+          
 
         }
         catch(PDOException $e)
