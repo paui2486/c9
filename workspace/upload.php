@@ -67,7 +67,7 @@ if (@copy($_FILES['uploadFile']['tmp_name'], "$target_dir" . $_FILES['uploadFile
     include("match6.php");
 } else {
     echo "<b>Error: 檔案上傳失敗</br>";
-    echo "Error: " . $_FILES["file"]["error"];
+    echo "Error: " . $_FILES["uploadFile"]["error"];
     echo("<meta http-equiv=REFRESH CONTENT=5;url=up.html>");//5秒後跳轉up.html
     exit;
 }
