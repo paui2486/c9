@@ -1,7 +1,7 @@
 
 <?php
 $color='藍色的';
-$car='FORD GT';
+$car='麥拉倫';
 ?>
 
 <html>
